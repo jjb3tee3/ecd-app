@@ -47,8 +47,8 @@ void printd(unsigned int level, const char *format, ...) {
 }
 
 void sig_handler(int signo) {
-		printd(RA_INFO, "Gracefully exiting application.");
-		exit(0);
+	printd(RA_INFO, "Gracefully exiting application.");
+	exit(0);
 }
 
 void setup_registers(uintptr_t mem_addr) {
@@ -70,31 +70,29 @@ void setup_duty_cycle() {
 }
 
 void configure_dio() {
-    pwm_A_enable = 0x0;
-    pwm_B_enable = 0x0;
-    pwm_C_enable = 0x0;
-    pwm_D_enable = 0x0;
+	pwm_A_enable = 0x0;
+	pwm_B_enable = 0x0;
+	pwm_C_enable = 0x0;
+	pwm_D_enable = 0x0;
 }
 
 #ifdef _NO_LCD_
 /* These functions mimic the LCD screen so we can build
  * without a board. */
 void writechars(char *msg) {
-		printd(RA_LCD, "%s", msg);
+	printd(RA_LCD, "%s", msg);
 }
 
 void lcdinit() {
-	// This is in LCD and only compiles on the board
-	// so this is to stop it erroring when compiling
 	printd(RA_DEBUG, "LCD initialised.");
 }
 
 void lcdwait() {
-		printd(RA_DEBUG, "LCD waiting");
+	printd(RA_DEBUG, "LCD waiting");
 }
 
 void command(uint8_t cmd) {
-		printd(RA_DEBUG, "LCD got command: %02x", cmd);
+	printd(RA_DEBUG, "LCD got command: %02x", cmd);
 }
 #endif
 
@@ -119,13 +117,13 @@ int main(int argc, char **argv) {
 	}
 
 	mem_addr = (uintptr_t)mmap(
-								0,
-								page_size,
-								PROT_READ | PROT_WRITE,
-								MAP_SHARED,
-								fd,
-								mem_phys
-							);
+			0,
+			page_size,
+			PROT_READ | PROT_WRITE,
+			MAP_SHARED,
+			fd,
+			mem_phys
+		);
 	
 	if(mem_addr == (uintptr_t)MAP_FAILED) {
 		printd(RA_ERROR, "mmap failed");
