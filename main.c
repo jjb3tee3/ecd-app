@@ -76,26 +76,6 @@ void configure_dio() {
 	pwm_D_enable = 0x0;
 }
 
-#ifdef _NO_LCD_
-/* These functions mimic the LCD screen so we can build
- * without a board. */
-void writechars(char *msg) {
-	printd(RA_LCD, "%s", msg);
-}
-
-void lcdinit() {
-	printd(RA_DEBUG, "LCD initialised.");
-}
-
-void lcdwait() {
-	printd(RA_DEBUG, "LCD waiting");
-}
-
-void command(uint8_t cmd) {
-	printd(RA_DEBUG, "LCD got command: %02x", cmd);
-}
-#endif
-
 int main(int argc, char **argv) {
 	int fd;
 	int page_size;

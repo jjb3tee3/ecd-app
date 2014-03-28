@@ -1,4 +1,24 @@
 #include "lcd.h"
+#ifdef _NO_LCD_
+/* These functions mimic the LCD screen so we can build
+ * without a board. */
+void writechars(char *msg) {
+	printd(RA_LCD, "%s", msg);
+}
+
+void lcdinit() {
+	printd(RA_DEBUG, "LCD initialised.");
+}
+
+void lcdwait() {
+	printd(RA_DEBUG, "LCD waiting");
+}
+
+void command(uint8_t cmd) {
+	printd(RA_DEBUG, "LCD got command: %02x", cmd);
+}
+
+#else
 
 void lcdinit(void) {
 	int fd = open("/dev/mem", O_RDWR|O_SYNC);
@@ -202,3 +222,4 @@ void writechars(unsigned char *dat) {
 		COUNTDOWN(i);
 	} while(*dat);
 }
+#endif
